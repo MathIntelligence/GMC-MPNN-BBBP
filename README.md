@@ -6,8 +6,19 @@ This repository provides code for hyperparameter optimization, feature extractio
 
 ## Installation
 
-Before using this repository, please install Chemprop following the official guide:
- 🔗 https://chemprop.readthedocs.io/en/latest/installation.html
+Before using this repository, please install Chemprop following the official guide: 🔗 https://chemprop.readthedocs.io/en/latest/installation.html
+
+📚 Additional Dependencies
+
+```bash
+pip install pandas numpy scipy scikit-learn biopandas rdkit
+```
+
+Depending on your system, `rdkit` may require Conda:
+
+```bash
+conda install -c rdkit rdkit
+```
 
 We recommend setting up a clean environment using `conda` or `virtualenv`, and ensuring all dependencies are satisfied as specified in the Chemprop documentation.
 
