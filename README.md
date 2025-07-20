@@ -1,7 +1,7 @@
 ````markdown
 # GMC-MPNN for BBBP Dataset
 
-This repository provides code for hyperparameter optimization, feature extraction, model training, and evaluation of a D-MPNN model enhanced with Geometric Graph Learning (GGL) features, specifically targeting the prediction of blood-brain barrier permeability (BBBP).
+This repository provides code for hyperparameter optimization, feature extraction, training, and evaluation of the GMC-BBBP model, specifically designed for predicting blood-brain barrier permeability (BBBP).
 
 ---
 
