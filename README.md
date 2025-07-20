@@ -139,6 +139,3 @@ We provide the following for reproducibility and testing:
 For questions or support, please contact:
 📧 [ducnguyen@utk.edu](mailto:ducnguyen@utk.edu)
 
----
-
-```
