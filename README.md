@@ -1,4 +1,4 @@
-# GMC-MPNN for BBBP Dataset
+# GMC-MPNN for BBBP Datasets
 
 This repository provides code for hyperparameter optimization, feature extraction, training, and evaluation of the GMC-MPNN model, specifically designed for predicting blood-brain barrier permeability (BBBP).
 
