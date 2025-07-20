@@ -86,7 +86,7 @@ Submit as a SLURM job:
 sbatch bbbp_train.sh
 ```
 
-To aggregate and analyze results:
+To analyze the results of all kernel training, run:
 
 ```bash
 python process_result.py
