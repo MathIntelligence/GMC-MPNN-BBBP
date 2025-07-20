@@ -6,7 +6,8 @@ This repository provides code for hyperparameter optimization, feature extractio
 
 ## Installation
 
-Before using this repository, please install Chemprop following the official guide: 🔗 https://chemprop.readthedocs.io/en/latest/installation.html
+Install Chemprop following the official guide: 
+🔗 https://chemprop.readthedocs.io/en/latest/installation.html
 
 📚 Additional Dependencies
 
