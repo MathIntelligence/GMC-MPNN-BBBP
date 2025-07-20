@@ -117,8 +117,8 @@ We provide the following for reproducibility and testing:
 * ✅ Pretrained model checkpoints
 * ✅ Sample GGL feature files (`.npz`)
 
-📦 Download from OneDrive:
-🔗 [https://liveutk-my.sharepoint.com/\:f:/g/personal/tnguy122\_vols\_utk\_edu/EnRFV9Zt7LhBp9pxIn\_x7tIBWj3sGA0P3kRhm8QehSK4Tw?e=wMUqHh](https://liveutk-my.sharepoint.com/:f:/g/personal/tnguy122_vols_utk_edu/EnRFV9Zt7LhBp9pxIn_x7tIBWj3sGA0P3kRhm8QehSK4Tw?e=wMUqHh)
+📥 **Access via OneDrive**  
+🔗 http://bit.ly/46S3uxz
 
 ---
 
