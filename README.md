@@ -130,7 +130,7 @@ We provide the following for reproducibility and testing:
 * ✅ Sample GGL feature files (`.npz`)
 
 📥 **Access via OneDrive**  
-🔗 http://bit.ly/46S3uxz
+🔗 http://bit.ly/4558Ovg
 
 ---
 
