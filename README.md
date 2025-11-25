@@ -82,7 +82,7 @@ sbatch extract_ggl_features.sh
 To train the model with extracted features:
 
 ```bash
-python bbbp_${DATASET_NAME}_training.py \
+python ${DATASET_NAME}_training.py \
        --input_path ${DATA_PATH} \
        --feature_file ${ATOM_FEATURE_FILE} \
        --results_path ${OUTPUT_DIR}
