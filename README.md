@@ -31,22 +31,13 @@ To search for optimal hyperparameters using Chemprop's CLI:
 
 ```bash
 chemprop hpopt \
-    --data-path /path/to/dataset.csv \
-    --task-type classification \
+    --data-path <path_to_dataset.csv> \
+    --task-type <classification|regression> \
     --search-parameter-keywords all \
     --split-type SCAFFOLD_BALANCED \
-    --hpopt-save-dir /path/to/output_dir/ \
+    --hpopt-save-dir <path_to_output_dir> \
     --raytune-num-gpus 1
-````
-
-### Key Arguments:
-
-* `--data-path`: Path to the input CSV dataset
-* `--task-type`: Use `classification` or `regression`
-* `--search-parameter-keywords`: Choose from `basic`, `learning_rate`, or `all`
-* `--split-type`: Data split strategy (e.g., `SCAFFOLD_BALANCED`)
-* `--hpopt-save-dir`: Output directory for tuning results
-* `--raytune-num-gpus`: GPUs allocated per trial (default = 1)
+```
 
 ---
 
@@ -55,17 +46,14 @@ chemprop hpopt \
 To compute GGL-based ligand features:
 
 ```bash
-python ${SCRIPT_PATH} -k ${KERNEL_INDEX} -c ${CUTOFF} -f ${CSV_FILE} -dd ${DATA_FOLDER} -fd ${FEATURE_FOLDER}
+python <script_path> -k <kernel_index> -c <cutoff> -f <csv_file> -dd <data_folder> -fd <feature_folder>
 ```
 
-**Arguments:**
+**Example:**
 
-* `SCRIPT_PATH`: Path to `get_ggl_ligand_features.py`
-* `KERNEL_INDEX`: Kernel index to use (e.g., 1551, 1556)
-* `CUTOFF`: Distance cutoff (recommended range: 5–20 Å)
-* `CSV_FILE`: Dataset with molecule identifiers
-* `DATA_FOLDER`: Folder containing `.mol2` files
-* `FEATURE_FOLDER`: Output folder for storing `.npz` feature files
+```bash
+python get_ggl_ligand_features.py -k 1551 -c 12.0 -f dataset.csv -dd ./mol2_files -fd ./features
+```
 
 ### On SLURM:
 
@@ -79,55 +67,79 @@ sbatch extract_ggl_features.sh
 
 ## 3. Model Training
 
-To train the model with extracted features:
+To train models with multiple seeds (0-4) and automatically average test results:
 
 ```bash
-python ${DATASET_NAME}_training.py \
-       --input_path ${DATA_PATH} \
-       --feature_file ${ATOM_FEATURE_FILE} \
-       --results_path ${OUTPUT_DIR}
+python train.py \
+    --training_script <training_script> \
+    --input_path <path_to_dataset.csv> \
+    --features_folder <path_to_features> \
+    --results_path <path_to_results> \
+    --seeds 0 1 2 3 4 \
+    --target_columns <target_column_name>
 ```
 
-* `DATA_PATH`: Path to training dataset
-* `ATOM_FEATURE_FILE`: Path to GGL `.npz` file
-* `OUTPUT_DIR`: Output folder (results saved under `test_${FILE_INDEX}`)
-
-Submit as a SLURM job:
+**Example for B3DB_cls:**
 
 ```bash
-sbatch bbbp_train.sh
+python train.py \
+    --training_script train_b3db_cls.py \
+    --input_path /path/to/B3DB_cls.csv \
+    --features_folder /path/to/features/B3DB_cls \
+    --results_path /path/to/results/B3DB_cls/multi_seed \
+    --seeds 0 1 2 3 4 \
+    --target_columns labels \
+    --batch_size 32 \
+    --max_epochs 100 \
+    --split_type SCAFFOLD_BALANCED
 ```
 
-To analyze the results of all kernel training, run:
+The script will train models for each seed and automatically calculate averaged test results across seeds.
+
+### Parallel Training with SLURM
+
+To submit parallel training jobs:
 
 ```bash
-python process_result.py
+sbatch train.sh
 ```
+
+Update `train.sh` with your dataset-specific paths and configuration before submitting.
 
 ---
 
-## 4. Model Testing
+## 4. Reproducing Results
 
-To evaluate a trained model:
+To reproduce results by training only the best kernel for each seed:
 
 ```bash
-python bbbp_testing.py \
-       --input_path ${DATA_PATH} \
-       --feature_file ${ATOM_FEATURE_FILE} \
-       --model_path ${MODEL_PATH} \
-       --batch_size ${BATCH_SIZE} \
-       --output_dir ${OUTPUT_DIR}
+python test.py \
+    --dataset <dataset_name> \
+    --input_path <path_to_dataset.csv> \
+    --features_folder <path_to_features> \
+    --results_path <path_to_results>
 ```
+
+**Example for B3DB_cls:**
+
+```bash
+python test.py \
+    --dataset B3DB_cls \
+    --input_path /path/to/B3DB_cls.csv \
+    --features_folder /path/to/features/B3DB_cls \
+    --results_path /path/to/results/B3DB_cls/test
+```
+
+The script automatically uses the best kernel for each seed
 
 ---
 
-## 5. Pretrained Models & Data Access
+## 5. Data Access
 
 We provide the following for reproducibility and testing:
 
-* ✅ All BBBP classification datasets
-* ✅ Pretrained model checkpoints
-* ✅ Sample GGL feature files (`.npz`)
+* ✅ All datasets
+* ✅ GGL feature files (`.npz`)
 
 📥 **Access via OneDrive**  
 🔗 http://bit.ly/4558Ovg
